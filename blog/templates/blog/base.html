@@ -8,24 +8,94 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <style>
+        ui {
+        border: 1px soild green;
+        }
+    </style>
 </head>
 <body>
-<div class = "page-header">
-    <h1><a href="">Django Girls Blog</a></h1>
-    <a href="{% url 'blog:post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus">글작성</span></a>
+    <header>
+
+        <div class="page-header">
+            <h1><a href="">title</a></h1>
+        </div>
 
 
-</div>
+    </header>
+    <nav>
+
+        <div>
+            <ul>
+                <li><a href="">게임</a></li>
+                <span>|</span>
+                <li><a href="">계산기</a></li>
+                <span>|</span>
+                <li><a href="">이미지뷰어</a></li>
+                <!-- <span>|</span>
+                <li><a href="">4</a></li> -->
+            </ul>
+        </div>
+    </nav>
+    <section>
+
+        {% block content %} {% endblock %}
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+    </section>
 
 
-<div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-    {% block content %}
-    {% endblock %}
-</div>
 
-            
+    <div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+
+                </div>
 </body>
 </html>
