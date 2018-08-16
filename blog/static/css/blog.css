@@ -11,7 +11,7 @@ nav li a {
 
 body {
     padding-left: 15px;
-    background-color: #262623;
+    background: url("/static/images/back.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     float: left;
@@ -45,4 +45,13 @@ nav li {
 section {
     background-color: #74AF9C;
     width: 1600px;
+    }
+
+.mid{
+    padding: 50px 0 0 150px;
+    }
+
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
     }
