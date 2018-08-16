@@ -3,99 +3,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Yang soon kyu | portfolio</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <style>
-        ui {
-        border: 1px soild green;
-        }
+
     </style>
 </head>
 <body>
     <header>
 
         <div class="page-header">
-            <h1><a href="">title</a></h1>
+            <h1>
+                <a href="">Yang soon kyu</a>
+            </h1>
         </div>
 
 
     </header>
-    <nav>
+    <div class="main">
+        <nav>
 
-        <div>
-            <ul>
-                <li><a href="">게임</a></li>
-                <span>|</span>
-                <li><a href="">계산기</a></li>
-                <span>|</span>
-                <li><a href="">이미지뷰어</a></li>
-                <!-- <span>|</span>
-                <li><a href="">4</a></li> -->
-            </ul>
-        </div>
-    </nav>
-    <section>
-
-        {% block content %} {% endblock %}
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-        <p>1</p>
-    </section>
+            <div>
+                <ul>
+                    <li><a href="{% url 'blog:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'blog:game' %}">Game</a></li>
+                    <li><a href="{% url 'blog:calculator' %}">Calculator</a></li>
+                    <li><a href="{% url 'blog:image_viewer' %}">Image-Viewer</a></li>
+                    <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <section>
+            <div>
+                {% block content %}
+                {% endblock %}
 
 
 
-    <div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <!-- <div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
 
-                </div>
+                </div> -->
 </body>
 </html>
