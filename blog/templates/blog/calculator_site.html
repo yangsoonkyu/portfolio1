@@ -247,7 +247,14 @@
                 len = target.length;
                 item = target[len - 1];
                 // data에서 마지막 아이템을 가져온다.
-                itemLen = item.length
+                try {
+                    itemLen = item.length
+                    
+                } catch (error) {
+                    return;
+                    
+                }
+                
                 // 아이템의 길이가 1보다 크면 한씩 지우고
                 if (itemLen > 1) {
                     var str = item.slice(0, -1);
@@ -303,8 +310,6 @@
         function myTab(){
             if(calcBase.type[0]==="B"){ calcBase.type.unshift("Bcm")}
             else if(calcBase.type[0]==="Bcm"){calcBase.type.unshift("B")}
-            // else if(calcBase.type[0]==="M"){calcBase.type.unshift("M2"); myCalcM2();}
-            // else if(calcBase.type[0]==="M2"){calcBase.type.unshift("M"); myCalcM2();}
         }
 
         // 입력
@@ -396,11 +401,10 @@
                     myCalcBmi();
                 } else if (calcBase.type[0] == "M") {
                     calcBase.resetData();
-                    myCalcM2();
+                    showScreen();
                 } else if (calcBase.type[0] == "M2") {
                     calcBase.resetData();
-                    calcBase.type.push("M2")
-                    myCalcM2();
+                    showScreen();
                 }
             } else if (getChar === "BS") {
                 calcBase.removeLastInput(); // 마지막 입력 값을 삭제
@@ -541,7 +545,7 @@
 
         }
 
-        function showGetStr() { /////////////////////////////////////////반복되는 부분 정리하기
+        function showGetStr() { 
             if (calcBase.type.length == 0) {
                 // console.log("입력된 수식을 표현");
                 var cArr = calcBase.data;
@@ -559,16 +563,16 @@
                 }
                 document.getElementById("screen").innerHTML = cStr;
             } else if (calcBase.type[0] === "B") {
-                var cArr = calcBase.data;
-                var cStr = "";
+                cArr = calcBase.data;
+                cStr = "";
                 for (i in cArr) {
                     cStr += cArr[i] + " kg";
                 }
                 if (cStr == "") { return document.getElementById("main").childNodes[0].innerText = "체중(kg)"; }
                 document.getElementById("main").childNodes[0].innerText = cStr;
             } else if (calcBase.type[0] === "Bcm") {
-                var cArr = calcBase.data2;
-                var cStr = "";
+                cArr = calcBase.data2;
+                cStr = "";
                 for (i in cArr) {
                     cStr += cArr[i];
                 }
@@ -576,8 +580,8 @@
                 if (cStr == "") { return document.getElementById("main").childNodes[1].innerText = "키(cm)"; }
                 document.getElementById("main").childNodes[1].innerText = cStr;
             } else if (calcBase.type[0] === "M") {
-                var cArr = calcBase.data;
-                var cStr = "";
+                cArr = calcBase.data;
+                cStr = "";
                 for (i in cArr) {
                     cStr += cArr[i] + " ㎡";
                 }
@@ -589,8 +593,8 @@
                 showResult(cStr);
 
             } else if (calcBase.type[0] === "M2") {
-                var cArr = calcBase.data;
-                var cStr = "";
+                cArr = calcBase.data;
+                cStr = "";
                 for (i in cArr) {
                     cStr += cArr[i] + " 평";
                 }
@@ -645,7 +649,7 @@
                 // commaStr = addComma(int);
                 // point = param - int;
                 // pStr = (point === 0)?"":point.toString().slice(1); // 삼항연산자
-                num = String(param); // 12345,123
+                num = String(param); // 12345.123
                 point = num.indexOf('.'); // 소숫점의 인덱스값
                 if (point < 0) {
                     commaStr = addComma(num); // 소수자리가 없는 경우
