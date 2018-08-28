@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니게임 물고기피하기</title>
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+
+
+        #gameBody {
+            position: absolute;
+            top: 250px;
+            left: 540px;
+        }
+
+        #gameBtn {
+            width: 90px;
+            height: 30px;
+            position: absolute;
+            top: 430px;
+            left: 880px;
+            background-color: #ff6100;
+            color: white;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px darkblue;
+        }
+
+        body {
+            position: fixed;
+            overflow-y: scroll;
+            width: 100%;
+        }
+
+        .txt {
+            display: inline-block;
+            position: absolute;
+            left: 650px;
+            top: 520px;
+        }
+
+        .image2 {
+            position: absolute;
+            left: 315px;
+            top: 600px;
+
+
+        }
+    </style>
+</head>
+
+
+
+<body id="id_body" onload="startGame()">
+
+
+    <img src="/static/images/게임 탑.jpg" alt="">
+    <img src="/static/images/txt.jpg" alt=" "class="txt">
+    <img src="/static/images/게임 바텀.jpg" alt="" class="image2">
+
+
+
+
+
+    <script>
+
+        var myGamePiece;
+        var myObstacles = [];
+        var myScore;
+        var myGameOver;
+        var myBackground;
+
+        function startGame() {
+            myGameArea.start();
+            myGamePiece = new component(25, 25, "/static/images/stop.gif", 40, 40, "bubble");
+            myScore = new component("20px", "Consolas", "black", 295, 30, "text");
+            myGameOver = new component("50px", "D2coding", "yellow", 110, 100, "text");
+            myBackground = new component(656, 270, "/static/images/background.jpg", 0, 0, "background")
+
+
+        }
+
+        function reStartGame() {
+            myGameArea.stop();
+            document.getElementById("gameBody").remove();
+            document.getElementById("gameBtn").remove();
+            myObstacles = [];
+            startGame();
+        }
+
+
+
+
+
+        var myGameArea = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                this.canvas.width = 480;
+                this.canvas.height = 270;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[4]).id = "gameBody";
+                this.interval = setInterval(updateGameArea, 10);
+                this.frameNo = 0;
+                window.addEventListener('keydown', function (e) {
+                    myGameArea.keys = (myGameArea.keys || []);
+                    myGameArea.keys[e.keyCode] = true;
+                    console.log(e.keyCode);
+                })
+                window.addEventListener('keyup', function (e) {
+                    myGameArea.keys[e.keyCode] = false;
+                    myGamePiece.image.src = "/static/images/stop.gif";
+                })
+
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            },
+            stop: function () {
+                clearInterval(this.interval);
+            }
+        }
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            if (type == "bubble" || type == "fish" || type == "background") {
+                this.image = new Image();
+                this.image.src = color;
+            }
+            this.width = width;
+            this.height = height;
+            this.color = color;
+            this.x = Math.floor((Math.random() * 300) + 80);
+            this.y = Math.floor((Math.random() * 100) + 80);
+            this.dirX = 1;
+            this.dirY = 1;
+            this.redX = x;
+            this.redY = y;
+            this.speed = 1
+            this.speedX = 0;
+            this.speedY = 0;
+
+            this.update = function () {
+                ctx = myGameArea.context;
+                if (type == "bubble" || type == "background") {
+                    ctx.drawImage(this.image, this.redX, this.redY, this.width, this.height)
+                    if (type == "background") {
+                        ctx.drawImage(this.image, this.redX + this.width, this.redY, this.width, this.height)
+                    }
+                } else if (type == "fish") {
+                    if (this.x >= myGameArea.canvas.width - this.width) {
+                        this.dirX *= -this.speed;
+                        if (this.color == "/static/images/redFishRight.gif") { this.image.src = "/static/images/redFishLeft.gif" }
+                        if (this.color == "/static/images/yellowFishRight.gif") { this.image.src = "/static/images/yellowFishLeft.gif" }
+
+                    } else if (this.x <= 0) {
+                        this.dirX *= -this.speed;
+                        if (this.color.indexOf("red") > -1) {
+                            this.image.src = "/static/images/redFishRight.gif"
+                        } else if (this.color.indexOf("yellow") > -1) {
+                            this.image.src = "/static/images/yellowFishRight.gif"
+                        }
+
+                    }
+
+                    if (this.y >= myGameArea.canvas.height - this.height || this.y <= 0) {
+                        this.dirY *= -this.speed;
+                    }
+
+                    this.x += this.dirX;
+                    this.y += this.dirY;
+
+                    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+                } else if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.shadowOffsetX = 1;
+                    ctx.shadowOffsetY = 1;
+                    ctx.shadowColor = "gray";
+                    ctx.shadowBlur = 4;
+                    ctx.fillText(this.text, this.redX, this.redY);
+
+
+                }
+
+            }
+            this.newPos = function () {
+                this.redX += this.speedX;
+                this.redY += this.speedY;
+                if (this.type == "background" && this.redX == -(this.width)) {
+                    this.redX = 0;
+                }
+            }
+            this.crashWith = function (otherobj) {
+                var myleft = this.redX + 3;
+                var myright = this.redX - 3 + (this.width);
+                var mytop = this.redY + 3;
+                var mybottom = this.redY - 3 + (this.height);
+
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.height);
+                var crash = true;
+
+                if ((mybottom < othertop) ||
+                    (mytop > otherbottom) ||
+                    (myright < otherleft) ||
+                    (myleft > otherright)) { crash = false; }
+                return crash;
+            }
+        }
+
+        function Grandom(min, max) {
+            return parseInt(Math.random() * (max - min + 1)) + min;
+
+        }
+
+        function updateGameArea() {
+            var scoreNum = Math.floor(myGameArea.frameNo / 50);
+
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i]) ||
+                    (myGamePiece.redX == ctx.canvas.width - 15 || myGamePiece.redX < -15) ||
+                    (myGamePiece.redY == ctx.canvas.height - 15 || myGamePiece.redY < -15)) {
+                    myGameArea.stop();
+                    myGameOver.text = "GAME OVER";
+                    myGameOver.update();
+                    var input = document.createElement("input");
+                    document.body.insertBefore(input, document.body.childNodes[5]).id = "gameBtn"
+                    var btn = document.getElementById("gameBtn")
+                    btn.type = "button"
+                    btn.value = "다시하기"
+                    btn.addEventListener('click', reStartGame)
+                    return;
+                }
+                // 컨버스 밖으로 나가도 게임오버가 되지 않게 설정
+                // if (myGamePiece.crashWith(myObstacles[i]) ) {
+                //     myGameArea.stop();
+                //     myGameOver.text = "GAME OVER";
+                //     myGameOver.update();
+                //     return;
+                // }
+
+            }
+            myGameArea.clear();
+            myBackground.speedX = -0.5;
+            myBackground.newPos();
+            myBackground.update();
+            myGamePiece.update();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo == 1 || myObstacles.length < 8) {
+                myObstacles.push(new component(10, 10, "/static/images/redFishRight.gif", 10, 10, "fish"))
+            } else if (scoreNum > 29 && myObstacles.length < 13) {
+                myObstacles.push(new component(10, 10, "/static/images/yellowFishRight.gif", 10, 10, "fish"))
+
+            } else if (scoreNum > 69) {
+                for (i = 0; i < myObstacles.length; i += 1) {
+                    myObstacles[i].width = 20;
+                    myObstacles[i].height = 20;
+                }
+            }
+
+
+
+            for (i = 0; i < myObstacles.length; i += 1) {
+                myObstacles[i].speedX = -1;
+                myObstacles[i].update();
+            }
+            if (scoreNum < 30) {
+                myScore.text = "stage1 SCORE: " + scoreNum;
+            } else if (scoreNum > 29 && scoreNum < 40) {
+                myScore.text = "stage2 SCORE: " + scoreNum;
+
+            } else if (scoreNum > 39 && scoreNum < 100) {
+                myScore.text = "stage3 SCORE: " + scoreNum;
+            } else if (scoreNum == 100) {
+                myScore.text = "stage3 SCORE: " + scoreNum;
+                myGameArea.stop();
+                myGameOver.text = "GAME CLEAR"
+                myGameOver.update();
+
+
+            }
+
+
+
+            myScore.update();
+            myGamePiece.speedX = 0;
+            myGamePiece.speedY = 0;
+            if (myGameArea.keys && myGameArea.keys[37]) { myGamePiece.image.src = "/static/images/go.gif"; myGamePiece.speedX = -1; }
+            if (myGameArea.keys && myGameArea.keys[39]) { myGamePiece.image.src = "/static/images/go.gif"; myGamePiece.speedX = 1; }
+            if (myGameArea.keys && myGameArea.keys[38]) { myGamePiece.image.src = "/static/images/go.gif"; myGamePiece.speedY = -1; }
+            if (myGameArea.keys && myGameArea.keys[40]) { myGamePiece.image.src = "/static/images/go.gif"; myGamePiece.speedY = 1; }
+
+            myGamePiece.newPos();
+            myGamePiece.update();
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

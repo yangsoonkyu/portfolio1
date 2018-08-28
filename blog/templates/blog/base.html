@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-    <link rel="stylesheet" href="{% static 'css/back.jpg' %}">
     <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <style>
 
     </style>
 </head>
-<body id="id_body" onload="startGame()">
+<body >
     <header>
 
         <div class="page-header">
@@ -30,10 +29,10 @@
             <div>
                 <ul>
                     <li><a href="{% url 'blog:profile' %}">Profile</a></li>
-                    <li><a href="{% url 'blog:calculator' %}">Calculator</a></li>
-                    <li><a href="{% url 'blog:game' %}">Game</a></li>
-                    <li><a href="{% url 'blog:image_viewer' %}">Image-Viewer</a></li>
+                    <li><a href="{% url 'blog:resume' %}">Resume</a></li>
+                    <li><a href="{% url 'blog:portfolio' %}">Portfolio</a></li>
                     <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                    <li><a href="{% url 'blog:design' %}">Design</a></li>
                 </ul>
             </div>
         </nav>

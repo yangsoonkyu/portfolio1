@@ -1,0 +1,118 @@
+{% extends 'blog/base.html' %} {% block content %}
+<style>
+    img {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .port_main {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+    }
+
+    .port_main>div {
+        /* border: rgb(165, 247, 229) solid 1px; */
+        padding: 3px;
+        margin: 10px;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .Link span {
+        display: flex;
+        display: inline-block;
+        position: relative;
+        left: 560px;
+        top: -40px;
+        padding: 2px;
+        color: #262623;
+        background-color: #DDF0EC;
+        margin: 2px;
+    }
+
+    .port_main p {
+        margin-top: 2px;
+        color: #DDF0EC;
+        font-size: 1.3em;
+    }
+
+    .text {
+        overflow: scroll;
+        overflow-x: hidden;
+        width: 730px;
+        height: 100px;
+        position: absolute;
+        top: 240px;
+        left: 660px;
+        color: white;
+    }
+
+    .text p {
+        margin: 1px;
+    }
+
+    .txt2 {
+        position: absolute;
+        top: 399px;
+        left: 660px;
+    }
+
+    .txt3 {
+        position: absolute;
+        top: 550px;
+        left: 660px;
+    }
+</style>
+<div class="port_main">
+
+    <div class="port1">
+        <img src="/static/images/port1.jpg" alt="" width="200">
+
+        <p>사칙연산 + 생활계산기 </p>
+        <div class="Link">
+            <span><a href="{% url 'blog:calculator' %}" target="_blank">화면보기</a></span>
+            <span><a href="">소스보기</a></span>
+        </div>
+        <br>
+    </div>
+    <div class="port2">
+        <img src="/static/images/port2.jpg" alt="" width="200">
+        <p>물고기 피하기 게임</p>
+        <div class="Link">
+            <span><a href="{% url 'blog:game' %}" target="_blank">화면보기</a></span>
+            <span><a href="">소스보기</a></span>
+
+        </div>
+
+    </div>
+    <div class="port3">
+        <img src="/static/images/port3.jpg" alt="" width="200">
+        <p>이미지 뷰어</p>
+        <div class="Link">
+            <span><a href="{% url 'blog:image' %}" target="_blank">화면보기</a></span>
+            <span><a href="">소스보기</a></span>
+
+        </div>
+    </div>
+
+</div>
+<div class="text">
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+</div>
+<div class="text txt2">
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+</div>
+<div class="text txt3">
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+    <p>설명글설명글</p>
+</div>
+{% endblock %}

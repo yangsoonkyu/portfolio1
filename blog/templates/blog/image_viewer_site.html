@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>이미지 뷰어</title>
+
+    <style>
+        .portfolio {
+            position: relative;
+            left: 330px;
+            width: 1000px;
+        }
+
+        .navi_opener {
+            display: flex;
+            align-content: space-between;
+        }
+
+        .port_1 {
+            margin-left: -440px;
+        }
+
+        .port_2 {
+            margin-left: 300px;
+        }
+
+        .port_5 {
+            margin-left: 50px;
+        }
+
+        .port_main {
+            float: left;
+        }
+
+        .port_imgBox {
+
+            float: left;
+        }
+
+        .port_imgBox li {
+
+            display: inline-block;
+            border: 1px solid lightgray;
+            padding: 8px;
+        }
+
+        canvas {
+            border: 1px solid lightgray;
+        }
+
+        #canvas2 {
+            position: relative;
+            top: 18px;
+            left: -130px;
+            box-shadow: 2px 2px 5px lightslategrey;
+        }
+
+        .imgAllBox {
+            /* border: 1px solid green; */
+            position: absolute;
+            top: 580px;
+            left: -40px;
+            display: flex;
+            align-content: space-between;
+            width: 400px;
+
+        }
+
+        input[type='file'] {
+            position: absolute;
+            color: transparent;
+            left: 350px;
+            top: 590px;
+        }
+
+        .row {
+            padding-top: 15px;
+        }
+    </style>
+
+</head>
+
+<body id="i_body">
+
+    <div>
+        <img src="/static/images/메인1.jpg" alt="">
+    </div>
+
+    <div class="portfolio">
+        <div class="port_main">
+            <span class="port_4">
+                <div class="port_imgBox">
+                    <p id="hereCvs"></p>
+
+                    <ul class="imgAllBox" id="id_ul">
+
+                        <li>
+                            <img id="imgFirst" src="/static/images/HA028_350A.jpg" alt="" width="40px;" class="poImg" onload="drawCanvas.start()">
+                        </li>
+                        <li>
+                            <img src="/static/images/HA029_350A.jpg" alt="" width="40px;" class="poImg">
+                        </li>
+                        <li>
+                            <img src="/static/images/HA030_350A.jpg" alt="" width="40px;" class="poImg">
+                        </li>
+                        <li>
+                            <img src="/static/images/HA190_350A.jpg" alt="" width="40px;" class="poImg">
+                        </li>
+                        <li>
+                            <img src="/static/images/HA128_350A.jpg" alt="" width="40px;" class="poImg row">
+                        </li>
+                    </ul>
+                </div>
+
+            </span>
+            <span class="port_5">
+                <img src="/static/images/주문하기.jpg" alt="">
+            </span>
+            <p>
+                <input id="input" type="file" onchange="fileView()" accept=".jpg, .jpeg, .png, .gif">
+            </p>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        var drawCanvas, canvas1, context, pic, mousePointX, mousePointY;
+
+        window.onload = function () { viewstart(); }
+
+
+
+        function fileView() {
+            var li, imgBox, liFile, imgFile, selectedFile, imgFile;
+            imgBox = document.getElementById("id_ul");
+
+            if (imgBox.childNodes[10].id === "li_file") {
+                imgBox.childNodes[10].remove();
+            }
+
+            li = document.createElement("li");
+            imgBox.insertBefore(li, imgBox.childNodes[10]).id = "li_file";
+            liFile = document.getElementById("li_file");
+            liFile.innerHTML = '<img src="" alt="" width="40px;" class="poImg" id="img_file">';
+            imgFile = document.getElementById("img_file");
+            selectedFile = document.getElementById('input');
+            imgName = selectedFile.files[0].name;
+            imgFile.src = "/static/images/" + imgName;
+            if (imgFile.height < 30) { imgFile.classList.add("row") }
+            imgFile.onload = function () { imgeView(); }
+        }
+
+        function viewstart() {
+            var imgFirst = document.getElementById("imgFirst");
+            var box = document.getElementById("i_body");
+            box.addEventListener("click", imgeView);
+            drawCanvas.canvas.addEventListener("mousemove", viewPoint)
+            drawCanvas.canvas.addEventListener("mouseout", removeCanvas)
+            drawCanvas.newSrc = [imgFirst.src];
+            drawCanvas.newSize = [imgFirst.width, imgFirst.height];
+
+        }
+
+
+        drawCanvas = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                pic = document.getElementById("imgFirst");
+                this.canvas.width = pic.width * 10;
+                this.canvas.height = pic.height * 10;
+                this.canvas.style.cursor = "none";
+                this.context = this.canvas.getContext("2d");
+                this.interval = setInterval(updateGameArea, 20);
+                document.getElementById("hereCvs").insertBefore(this.canvas, document.getElementById("hereCvs").childNodes[0]).id = "canvas1";
+                myBackground = new component(pic.width * 10, pic.height * 10, pic.src, 0, 0, "image")
+                myBackground.update();
+            },
+            move: function () { setInterval(updateGameArea, 20) },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+            },
+            newSrc: [],
+            newSize: []
+
+        }
+
+
+
+
+        function imgeView(e) {
+            var picImg;
+            if (e === undefined) { picImg = document.getElementById("img_file") }
+            else { picImg = e.target; }
+            if (picImg.className.indexOf('poImg') === -1) { return; }
+            drawCanvas.newSrc = [];
+            drawCanvas.newSize = [];
+            drawCanvas.newSrc.push(picImg.src);
+            drawCanvas.newSize.push(picImg.width);
+            drawCanvas.newSize.push(picImg.height);
+            drawCanvas.canvas.width = picImg.width * 10;
+            drawCanvas.canvas.height = picImg.height * 10;
+            drawCanvas.context.drawImage(picImg, 0, 0, picImg.width * 10, picImg.height * 10)
+        }
+
+        function viewPoint(e) {
+            mousePointX = e.pageX;
+            mousePointY = e.pageY;
+            myGamePiece = new component(80, 80, "red", 10, 120);
+            myGamePiece.x = e.pageX - 338;
+            myGamePiece.y = e.pageY - 243;
+            myGamePiece.update();
+            if (document.body.childNodes.length === 7) { makeNewCanvas(); }
+            myBig = new component(drawCanvas.canvas.width * percent(), drawCanvas.canvas.height * percent(), drawCanvas.newSrc[0], 0, 0, "image2");
+            myBig.update();
+            //console.log("mouse x= " + e.pageX + ", piece x =" + myGamePiece.x)
+            //console.log("mouse y= " + e.pageY + ", piece y =" + myGamePiece.y)
+        }
+
+        function removeCanvas() {
+            document.getElementById("canvas2").remove();
+        }
+
+        function makeNewCanvas() {
+            var canvas2 = document.createElement("canvas")
+            canvas2.width = myGamePiece.width * 5;
+            canvas2.height = myGamePiece.height * 5;
+            document.body.insertBefore(canvas2, document.body.childNodes[7]).id = "canvas2"
+        }
+
+        function percent() {
+            var s = myGamePiece.width; // 정사각형
+            var cvs2 = document.getElementById("canvas2")
+            var c = cvs2.width; // 정사각형   
+            return c / s
+        }
+
+
+        function updateGameArea() {
+            drawCanvas.clear()
+            myBackground.update();
+            try {
+                myGamePiece.update();
+            } catch (error) { return; }
+        }
+
+
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            if (type == "image" || type == "image2") {
+                this.image = new Image();
+                this.image.src = color;
+            }
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.update = function () {
+                ctx = drawCanvas.context;
+
+                if (type == "image") {
+                    if (drawCanvas.newSrc.length === 1) {
+                        this.image.src = drawCanvas.newSrc[0];
+                        this.width = drawCanvas.newSize[0] * 10
+                        this.height = drawCanvas.newSize[1] * 10
+                    }
+                    ctx.drawImage(this.image,
+                        this.x,
+                        this.y,
+                        this.width, this.height);
+                } else if (type == "image2") {
+                    var cvs = document.getElementById("canvas2");
+                    ctx = cvs.getContext("2d");
+                    if (myGamePiece.x + myGamePiece.width >= drawCanvas.canvas.width) { myGamePiece.x = drawCanvas.canvas.width - myGamePiece.width; }
+                    if (myGamePiece.y + myGamePiece.height >= drawCanvas.canvas.height) { myGamePiece.y = drawCanvas.canvas.height - myGamePiece.height; }
+                    ctx.translate(-myGamePiece.x * percent(), -myGamePiece.y * percent())
+                    ctx.drawImage(this.image,
+                        this.x,
+                        this.y,
+                        this.width, this.height)
+                    ctx.translate(myGamePiece.x * percent(), myGamePiece.y * percent())
+                } else {
+                    ctx.strokeStyle = color;
+                    if (myGamePiece.x + myGamePiece.width >= drawCanvas.canvas.width) { myGamePiece.x = drawCanvas.canvas.width - myGamePiece.width; }
+                    if (myGamePiece.y + myGamePiece.height >= drawCanvas.canvas.height) { myGamePiece.y = drawCanvas.canvas.height - myGamePiece.height; }
+                    ctx.strokeRect(this.x, this.y, this.width, this.height);
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
