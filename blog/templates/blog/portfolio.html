@@ -61,38 +61,55 @@
         position: absolute;
         top: 577px;
     }
-
-   
 </style>
 <h1 class="sub_h1"> My Portfolio</h1>
 <div class="port_main">
 
     <div class="port1">
-        <img src="/static/images/port1.jpg" alt="" width="200">
-
+        <a href="{% url 'blog:calculator' %}" target="_blank">
+            <img src="/static/images/port1.jpg" alt="" width="200">
+        </a>
         <p>사칙연산 + 생활계산기 </p>
         <div class="Link">
-            <span><a href="{% url 'blog:calculator' %}" target="_blank">화면보기</a></span>
-            <span><a href="">소스보기</a></span>
+            <span>
+                <a href="{% url 'blog:calculator' %}" target="_blank">화면보기</a>
+            </span>
+            <span>
+                <a href="">소스보기</a>
+            </span>
         </div>
         <br>
     </div>
     <div class="port2">
-        <img src="/static/images/port2.jpg" alt="" width="200">
+        <a href="{% url 'blog:game' %}" target="_blank">
+            <img src="/static/images/port2.jpg" alt="" width="200">
+        </a>
+
         <p>물고기 피하기 게임</p>
         <div class="Link">
-            <span><a href="{% url 'blog:game' %}" target="_blank">화면보기</a></span>
-            <span><a href="">소스보기</a></span>
+            <span>
+                <a href="{% url 'blog:game' %}" target="_blank">화면보기</a>
+            </span>
+            <span>
+                <a href="">소스보기</a>
+            </span>
 
         </div>
 
     </div>
     <div class="port3">
-        <img src="/static/images/port3.jpg" alt="" width="200">
+        <a href="{% url 'blog:image' %}" target="_blank">
+            <img src="/static/images/port3.jpg" alt="" width="200">
+        </a>
+
         <p>이미지 뷰어</p>
         <div class="Link">
-            <span><a href="{% url 'blog:image' %}" target="_blank">화면보기</a></span>
-            <span><a href="">소스보기</a></span>
+            <span>
+                <a href="{% url 'blog:image' %}" target="_blank">화면보기</a>
+            </span>
+            <span>
+                <a href="">소스보기</a>
+            </span>
 
         </div>
     </div>

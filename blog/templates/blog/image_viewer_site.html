@@ -174,12 +174,10 @@
                 this.canvas.height = pic.height * 10;
                 this.canvas.style.cursor = "none";
                 this.context = this.canvas.getContext("2d");
-                this.interval = setInterval(updateGameArea, 20);
                 document.getElementById("hereCvs").insertBefore(this.canvas, document.getElementById("hereCvs").childNodes[0]).id = "canvas1";
                 myBackground = new component(pic.width * 10, pic.height * 10, pic.src, 0, 0, "image")
-                myBackground.update();
+                this.interval = setInterval(updateGameArea, 20);
             },
-            move: function () { setInterval(updateGameArea, 20) },
             clear: function () {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
             },
