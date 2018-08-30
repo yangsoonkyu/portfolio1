@@ -117,11 +117,18 @@
 
 
     section {
-        background:url("/static/images/back2.jpg")
+        background: url("/static/images/back2.jpg")
     }
 
-    .top1{
+    .top1 {
         width: 50px;
+    }
+
+    #clock{
+        position: absolute;
+        top: 153px;
+        left: 770px;
+       font : bold 1.3em sans; 
     }
 </style>
 
@@ -179,6 +186,18 @@
     <div class="comment memo3">
         <p>어쩌고 저쩌고</p>
     </div>
+
+    <p id="clock"></p>
+    <script>
+        function displayTime() {
+            var elt = document.getElementById("clock");
+            var now = new Date();
+            var time = now.toLocaleTimeString();
+            elt.innerHTML = time.slice(0, -3);
+            setTimeout(displayTime, 1000);
+        }
+        window.onload = displayTime;  
+    </script>
 
 </div>
 
