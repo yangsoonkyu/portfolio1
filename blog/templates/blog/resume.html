@@ -1,8 +1,186 @@
 {% extends 'blog/base.html' %} {% block content %}
 
 <h1 class="sub_h1"> My Resume</h1>
+<style>
+    img {
+        position: absolute;
+        top: 180px;
+        left: 940px;
+        width: 300px;
+        height: 150px;
+    }
 
-이력서
+    .img2 {
+        top: 351px;
+    }
+
+    .img3 {
+        top: 544px;
+    }
+
+    .list {
+        width: 110px;
+        height: 150px;
+        margin-left: 30px;
+        margin-top: 40px;
+
+    }
+
+    .date {
+        position: absolute;
+        /* border: 1px solid rgb(140, 197, 179); */
+        width: 150px;
+        height: 150px;
+        left: 560px;
+        top: 190px;
+        padding: 5px;
+        text-align: center;
+
+    }
+
+    .date p,
+    .value p {
+        background-color: white;
+        border-radius: 8px;
+        color: black;
+        font-weight: bold;
+        padding: 1px 0 1px 0;
+    }
+
+    .list p {
+        background-color: #afc0cf;
+        border-radius: 8px;
+        color: white;
+        font-weight: bolder;
+        font-size: 1.3em;
+        text-align: center;
+    }
 
 
-    {% endblock %}
+    .txt2 {
+        position: absolute;
+        top: 371px;
+    }
+
+    .txt3 {
+        position: absolute;
+        top: 554px;
+
+    }
+
+    .value {
+        /* border: 1px solid red; */
+        position: absolute;
+        top: 190px;
+        left: 720px;
+        width: 220px;
+        height: 150px;
+        padding: 5px;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    .text2 {
+        position: absolute;
+        top: 371px;
+    }
+
+    .text3 {
+        position: absolute;
+        top: 554px;
+        font-size: 0.9em;
+    }
+
+    .comment {
+        /* border: 1px solid #74AF9C; */
+        position: absolute;
+        top: 186px;
+
+        width: 320px;
+        height: 150px;
+        padding: 5px;
+        text-align: center;
+        left: 950px;
+
+    }
+
+
+    .memo2 {
+        position: absolute;
+        top: 371px;
+    }
+
+    .memo3 {
+        position: absolute;
+        top: 554px;
+    }
+
+
+    section {
+        background:url("/static/images/back2.jpg")
+    }
+
+    .top1{
+        width: 50px;
+    }
+</style>
+
+
+<div>
+    <div class="list">
+        <p>학력</p>
+    </div>
+    <div class="list">
+
+        <p>경력</p>
+    </div>
+    <div class="list">
+
+        <p>교육사항</p>
+    </div>
+
+    <div class="date txt1">
+        <p>2006.02 - 2009.02</p>
+        <p>2010.02 - 2011.04</p>
+    </div>
+    <div class="date txt2">
+        <p>2011.04 - 2014.03</p>
+        <p>2014.04 - 2016.03</p>
+        <p>2016.04 - 2018.03</p>
+    </div>
+    <div class="date txt3">
+        <p>2018.05 - 2018.11</p>
+    </div>
+
+    <div class="value text1">
+        <p>군산상고 | 컴퓨터그래픽과 | 졸업 </p>
+        <p>군산대학교 | 산업디자인과 | 중퇴 </p>
+    </div>
+    <div class="value text2">
+        <p>어쩌고 저쩌고</p>
+        <p>어쩌고 저쩌고</p>
+        <p>어쩌고 저쩌고</p>
+    </div>
+    <div class="value text3">
+        <p>스마트웹&콘텐츠 개발자 양성</p>
+    </div>
+    <div>
+
+        <img src="/static/images/comment.png" alt="">
+        <img class="img2" src="/static/images/comment.png" alt="">
+        <img class="img3" src="/static/images/comment.png" alt="">
+    </div>
+    <div class="comment memo1">
+        <p>어쩌고 저쩌고</p>
+    </div>
+    <div class="comment memo2">
+        <p>어쩌고 저쩌고</p>
+    </div>
+    <div class="comment memo3">
+        <p>어쩌고 저쩌고</p>
+    </div>
+
+</div>
+
+
+{% endblock %}
