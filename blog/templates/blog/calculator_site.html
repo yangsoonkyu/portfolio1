@@ -128,12 +128,46 @@
             left: 580px;
         }
 
-        .calcTxt{
+        .calcTxt {
             display: inline-block;
             position: absolute;
             top: 170px;
             left: 850px;
             font-weight: bold;
+        }
+
+        .memoImg {
+            position: absolute;
+            top: 20px;
+            left: 1150px;
+
+        }
+
+        .memoText {
+            position: absolute;
+            top: 64px;
+            left: 60px;
+            border: 1px solid orange;
+            width: 343px;
+            height: 310px;
+            ;
+        }
+
+        .memoText p {
+
+            font-size: 0.90em;
+            margin: 1px;
+        }
+
+        .Enter {
+            padding-bottom: 8px;
+        }
+
+        .txt2 {
+            position: absolute;
+            top: 470px;
+            overflow: scroll;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -185,9 +219,42 @@
         </div>
 
     </div>
-    <div class="calcTxt"> 
+    <div class="calcTxt">
         <img src="/static/images/계산기설명.jpg" alt="">
-        
+
+    </div>
+    <div class="memoImg">
+        <img src="/static/images/memo.png" alt="" width="430px;">
+        <img src="/static/images/memo.png" alt="" width="430px;">
+        <div class="memoText">
+            <p>수식을 입력하여 사칙연산을 수행하고</p>
+            <p class="Enter"> 마우스와 키보드 두가지 방법으로 입력가능하다</p>
+            <p>입력된 수식은 화면에 보여지며</p>
+            <p>계산기의 기능에 따라 입력데이터의 길이나</p>
+            <p class="Enter">특수문자의 입력이 제한된다</p>
+            <p>BMI계산기 실행중에 Tab을 누르거나
+                <br>마우스를 이용하여 데이터가 입력되는 창을 </p>
+            <p class="Enter">선택할수 있다. (키, 몸무게 중에서 선택가능)</p>
+            <p>㎡버튼을 누르면 평방미터 계산기가 실행되고 반복해서 누르면 단위가 바뀐다</p>
+
+        </div>
+        <div class="memoText txt2">
+            <p class="Enter">힘들었던 점:</p>
+            <p>BMI나 평방미터 계산기 기능을 추가하면서</p>
+            <p>이미 완성된 기능인 AC, BS 버튼에서 버그들이 </p>
+            <p>발생했고 지원하지 않는 수식의 경우  </p>
+            <p> catch문을 사용할때 에러처리가 원하는 대로 </p>
+            <p class="Enter">되지 않아서 어려웠습니다</p><br>
+
+            <p class="Enter">해결방법:</p>
+            <p>계속 오류를 찾는 과정에서 디버깅에 익숙해지기 </p>
+            <p>시작했고 코드의 어떤 부분에 조건을 줘야하는지 </p>
+            <p> class="Enter"보이기 시작했습니다</p>
+            <p>버튼이 눌릴때 계산기가 어떤 기능을 실행중인지 </p>
+            <p> 생각하고 조건문을 추가하면서 기능에 따라 코드를 수정하면서 해결하였습니다</p> <br>
+            <p>catch문 또한 디버깅을 하면서 에러를 처리후에 다시 되돌아 온다는 것을 발견했고</p>
+            <p>코드의 진행순서를 다시 확인하여 수정하면서 해결하였습니다.</p>
+        </div>
     </div>
     <script>
 
@@ -210,7 +277,7 @@
             //editLimit(n) << 자릿수를 15자리로 제한하는 함수에서 소수점을 포함한 자리제한을 위해 존재한다
             calcBase.deciLen = 5;
 
-            
+
         }
 
         window.onload = function () {
@@ -224,18 +291,18 @@
             data: [],
             data2: [],
             calcSign: "+-*/0123456789()",
-            resetData: function () { 
+            resetData: function () {
                 return this.data = [];
             },
             calcData: function () { // 데이타를 문자열로 합쳐서 수식계산결과를 보여줌
                 try {
                     return eval(this.data.join(""));
-                    
+
                 } catch (error) {
                     return "에러"
-                    
+
                 }
-                
+
             },
             removeLastInput: function () { // 한글자씩 지운다
                 var target, len, item, itemLen;
@@ -249,12 +316,12 @@
                 // data에서 마지막 아이템을 가져온다.
                 try {
                     itemLen = item.length
-                    
+
                 } catch (error) {
                     return;
-                    
+
                 }
-                
+
                 // 아이템의 길이가 1보다 크면 한씩 지우고
                 if (itemLen > 1) {
                     var str = item.slice(0, -1);
@@ -297,19 +364,20 @@
         }
 
         //키보드 이벤트 발생시 실행된다
-        function shortCuts(e) { 
+        function shortCuts(e) {
             calcBase.keydown.push("k")
             // 계산기의 입력방식을 알려주기위해 키다운배열에 값을 넣는다
             // console.log(e.key)
-            if(window.event.keyCode == 9){ 
-                event.returnValue = false ; // 실제 탭키의 이벤트 실행을 막는다.
-                return myTab();}
+            if (window.event.keyCode == 9) {
+                event.returnValue = false; // 실제 탭키의 이벤트 실행을 막는다.
+                return myTab();
+            }
             getInput(e);
         }
 
-        function myTab(){
-            if(calcBase.type[0]==="B"){ calcBase.type.unshift("Bcm")}
-            else if(calcBase.type[0]==="Bcm"){calcBase.type.unshift("B")}
+        function myTab() {
+            if (calcBase.type[0] === "B") { calcBase.type.unshift("Bcm") }
+            else if (calcBase.type[0] === "Bcm") { calcBase.type.unshift("B") }
         }
 
         // 입력
@@ -326,15 +394,15 @@
         // 연속되는 숫자 입력을 자릿수를 추가해 넣어준다.  예) 2,3,4 => 234
         function getInput(e) {
             var calcBtn, dataArr, getChar, lastItem, btns, dataArrLen;
-            if(calcBase.type.length > 5){calcBase.type.pop()}
+            if (calcBase.type.length > 5) { calcBase.type.pop() }
             btns = document.querySelectorAll(".btn");
             if (calcBase.keydown[0] === "k") { //입력방식이 키보드일때
                 calcBase.keydown = [];
                 getChar = e.key; //키보드의 입력값을 넣어준다.
-                switch(getChar){ // 단축키 기정하는 부분
-                    case "Escape": getChar = "AC"; break; 
-                    case "Enter": getChar = "="; break; 
-                    case "Backspace": getChar = "BS"; break; 
+                switch (getChar) { // 단축키 기정하는 부분
+                    case "Escape": getChar = "AC"; break;
+                    case "Enter": getChar = "="; break;
+                    case "Backspace": getChar = "BS"; break;
                 }
                 for (var i = 0; i < btns.length; i++) {
                     if (btns[i].innerText.indexOf(getChar) === 0) {
@@ -354,7 +422,7 @@
                 if (calcBtn.className.indexOf('btn') === -1) return;
             } catch (error) {
                 return;
-                
+
             }
             // (,),C,BS,1,2,3,4,5,6,7,8,9,+,-,*,/
             // 조건 - 최초 입력시 기호의 경우 *이거나, / 는 무시한다.
@@ -371,13 +439,13 @@
                 // 값을 붙여준다. (["1","2","+","3"]이 아닌 ["12","+","3"] 으로 관리하기 위해서)
                 var a = lastItem.concat(getChar);
                 var num = 12;
-                if(calcBase.type[0]==="B"){num = 5}
-                
+                if (calcBase.type[0] === "B") { num = 5 }
+
                 if (dataArr[dataArrLen - 1].length < num) {
                     dataArr[dataArrLen - 1] = parseInt(a).toString();
                 }
                 showGetStr();
-            }else if (Number.isInteger(parseInt(calcBase.data2[calcBase.data2.length-1])) && Number.isInteger(parseInt(getChar)) && calcBase.type[0] == "Bcm"){ 
+            } else if (Number.isInteger(parseInt(calcBase.data2[calcBase.data2.length - 1])) && Number.isInteger(parseInt(getChar)) && calcBase.type[0] == "Bcm") {
                 num = 5;
                 if (calcBase.data2.length < num) {
                     calcBase.data2.push(getChar)
@@ -409,7 +477,7 @@
             } else if (getChar === "BS") {
                 calcBase.removeLastInput(); // 마지막 입력 값을 삭제
                 showGetStr(); // 저장된 수식을 계산하고 화면에 보여준다.
-            } else if (getChar === "Calc") { 
+            } else if (getChar === "Calc") {
                 window.location.reload();
             } else if (getChar === "㎡") {
                 myCalcM2();
@@ -450,7 +518,7 @@
                 scr.innerText = "㎡";
                 scr2.innerText = "평";
                 calcBase.type.unshift("M")
-            } else if (calcBase.type[0] === "M") { 
+            } else if (calcBase.type[0] === "M") {
                 calcBase.resetData();
                 scr.innerText = "평";
                 scr2.innerText = "㎡";
@@ -545,7 +613,7 @@
 
         }
 
-        function showGetStr() { 
+        function showGetStr() {
             if (calcBase.type.length == 0) {
                 // console.log("입력된 수식을 표현");
                 var cArr = calcBase.data;
@@ -614,7 +682,7 @@
             // 판단문 - 결과값 또는 초과 미만의 메세지를 처리
             if (param === undefined) {
                 param = "";
-            }else if(param === "에러"){
+            } else if (param === "에러") {
                 return document.getElementById("screen2").innerHTML = "지원하지 않는 수식입니다";
             } else if (param > 999999999999 || param < -99999999999) {
                 param = "결과가 범위를 초과하고 있습니다.";
@@ -629,7 +697,7 @@
                     } else {
                         bStr = "과체중";
                     }
-                    calcBase.deciLen = 2; 
+                    calcBase.deciLen = 2;
                     param = "BMI 수치는 " + editLimit(param) + "이므로 <br>" + bStr + "입니다.";
                 } else if (calcBase.type[0] === "M") {
 

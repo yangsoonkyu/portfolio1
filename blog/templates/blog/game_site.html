@@ -51,6 +51,51 @@
 
 
         }
+
+        .memoImg {
+            position: absolute;
+            top: 20px;
+
+        }
+
+        .memoText {
+            position: absolute;
+            top: 64px;
+            left: 60px;
+            width: 343px;
+            height: 310px;
+          
+        }
+
+        .memoText p {
+
+            font-size: 0.90em;
+            margin: 1px;
+        }
+
+        .Enter {
+            padding-bottom: 8px;
+        }
+
+        .txt2 {
+            
+            position: absolute;
+            top: 460px;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+
+        .img2{
+            position: absolute;
+            top:250px;
+            left: 1100px; 
+        }
+
+        #memo{
+            position: absolute;
+            left: 1160px;
+            top: 300px;
+        }
     </style>
 </head>
 
@@ -62,6 +107,43 @@
     <img src="/static/images/게임 탑.jpg" alt="">
     <img src="/static/images/txt.jpg" alt=" "class="txt">
     <img src="/static/images/게임 바텀.jpg" alt="" class="image2">
+
+    <div class="memoImg">
+            <img src="/static/images/memo.png" alt="" width="430px;">
+            <img class="img2" src="/static/images/memo.png" alt="" width="430px;">
+            <div class="memoText">
+                <p>키보드의 방향키를 조작하여 플레이어가 </p>
+                <p class="Enter"> 물고기(장애물)을 피하는 게임</p>
+                <p>시간이 지나면 스코어가 더해지는 방식으로</p>
+                <p class="Enter">스코어가 높아짐에 따라 3가지 스테이지가 있다</p>
+                <p > 스테이지 2: 장애물 증가</p>
+                <p> 스테이지 3: 장애물 크기 증가 </p> 
+                <p class="Enter"> 스코어가 100점이 되면 게임이 클리어된다.</p>
+                
+                <p >물고기들은 진행방향에 따라 모양도 함께 바뀐다</p>
+                <p >플레이어가 물고기와 충돌하면 게임오버가 된다</p>
+                <p> 게임오버시에는 게임을 다시 시작할수 있는 버튼이 생긴다</p>
+    
+            </div>
+            <div class="memoText txt2" id="memo" >
+                <p class="Enter">힘들었던 점:</p>
+                <p>물고기가 뱡향에 따라 이미지가 바뀌는 것을 </p>
+                <p>조건문으로 구현한 후 장고에 코드를 적용하면서  </p>
+                <p class="Enter">이미지가 바뀌지 않는 문제가 발생했다</p>
+                <p >스테이지에 따라 바뀌는 장애물을 테스트하려면 일정점수에 도달하기위해 플레이를 해야했고 </p>
+                <p > 클리어를 못하면 반복해야 했다</p><br>
+    
+                <p class="Enter">해결방법:</p>
+                <p>이미지가 바뀌는 조건문을 파일이름에 indexOf를 </p>
+                <p> 사용하였고  이미지의 경로가 바뀌면서 인덱스값도 바뀌는 문제였다. </p>
+                <p>파일명을 조건문으로 사용할때 경로로 인해서 </p> <p>결과가 바뀐다는 점을 고려하는 코드로 </p>
+                <p class="Enter"> 수정해 주어서 문제를 해결했다.</p>
+                <p>실제 게임을 플레이 할때는 플레이어가 </p>
+                <p> 캔버스 밖으로 일정부분이 나가면 게임 오버되지만 게임을 테스트 하기 위해서</p>
+                <p> 화면 밖으로 나가도 계속 플레이 되는 코드를 만들었습니다</p>
+                <p>평소에는 주석처리되어 있고 게임을 테스트할때 주석을 해제하여 사용하였습니다.</p>
+            </div>
+        </div>
 
 
 
