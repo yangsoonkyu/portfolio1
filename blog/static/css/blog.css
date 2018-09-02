@@ -6,6 +6,14 @@ h1 a {
 
 }
 
+h5 {
+    color:#DDF0EC;
+    position: absolute;
+    top :80px;
+    left: 430px;
+
+    }
+
 nav li a {
     color:#262623;
 }
@@ -55,7 +63,7 @@ nav li {
     }
 
 section {
-    background-color: white ;
+    background-color: #afc1cf ;
     width: 1600px;
     }
 

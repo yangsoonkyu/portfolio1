@@ -64,6 +64,15 @@
         position: absolute;
         top: 527px;
     }
+
+    .used{
+        position: relative;
+        color: #035e5e;
+        font-size: 1em;
+        font-weight: 100;
+        left: 400px;
+        top: -20px;
+    }
 </style>
 <h1 class="sub_h1"> My Portfolio</h1>
 <div class="port_main">
@@ -73,12 +82,13 @@
             <img src="/static/images/port1.jpg" alt="" width="200">
         </a>
         <p>사칙연산 + 생활계산기 </p>
+        <span class="used"> HTML / CSS / JavaScript</span>
         <div class="Link">
             <span>
                 <a href="{% url 'blog:calculator' %}" target="_blank">화면보기</a>
             </span>
             <span>
-                <a href="">소스보기</a>
+                <a href="https://github.com/yangsoonkyu/portfolio1/blob/master/blog/templates/blog/calculator_site.html" target="_blank">소스보기</a>
             </span>
         </div>
         <br>
@@ -89,12 +99,13 @@
         </a>
 
         <p>물고기 피하기 게임</p>
+        <span class="used"> HTML / CSS / JavaScript</span>
         <div class="Link">
             <span>
                 <a href="{% url 'blog:game' %}" target="_blank">화면보기</a>
             </span>
             <span>
-                <a href="">소스보기</a>
+                <a href="https://github.com/yangsoonkyu/portfolio1/blob/master/blog/templates/blog/game_site.html" target="_blank">소스보기</a>
             </span>
 
         </div>
@@ -106,12 +117,13 @@
         </a>
 
         <p>이미지 뷰어</p>
+        <span class="used"> HTML / CSS / JavaScript</span>
         <div class="Link">
             <span>
                 <a href="{% url 'blog:image' %}" target="_blank">화면보기</a>
             </span>
             <span>
-                <a href="">소스보기</a>
+                <a href="https://github.com/yangsoonkyu/portfolio1/blob/master/blog/templates/blog/image_viewer_site.html" target="_blank">소스보기</a>
             </span>
 
         </div>
