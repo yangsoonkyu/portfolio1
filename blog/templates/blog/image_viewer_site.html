@@ -98,7 +98,7 @@
             position: absolute;
             top: 64px;
             left: 60px;
-            border: 1px solid orange;
+            /* border: 1px solid orange; */
             width: 343px;
             height: 310px;
             ;
@@ -197,7 +197,7 @@
             imgFile = document.getElementById("img_file");
             selectedFile = document.getElementById('input');
             imgName = selectedFile.files[0].name;
-            imgFile.src = "/static/images/" + imgName;
+            imgFile.src =  imgName;
             if (imgFile.height < 30) { imgFile.classList.add("row") }
             imgFile.onload = function () { imgeView(); }
         }
