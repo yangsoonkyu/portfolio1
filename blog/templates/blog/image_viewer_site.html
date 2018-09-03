@@ -196,7 +196,8 @@
             liFile.innerHTML = '<img src="" alt="" width="40px;" class="poImg" id="img_file">';
             imgFile = document.getElementById("img_file");
             selectedFile = document.getElementById('input');
-            imgName = selectedFile.files[0].name;
+            // imgName = selectedFile.files[0].name;
+            imgName = selectedFile.value;
             imgFile.src =  imgName;
             if (imgFile.height < 30) { imgFile.classList.add("row") }
             imgFile.onload = function () { imgeView(); }
