@@ -81,7 +81,7 @@
         }
 
 
-                .memoImg {
+        .memoImg {
             position: absolute;
             top: 20px;
 
@@ -130,7 +130,7 @@
         <img src="/static/images/메인1.jpg" alt="">
 
     </div>
-    
+
 
     <div class="portfolio">
         <div class="port_main">
@@ -163,16 +163,16 @@
                 <img src="/static/images/주문하기.jpg" alt="">
             </span>
             <p>
-                <input id="input" type="file" onchange="fileView()" accept=".jpg, .jpeg, .png, .gif">
+                <input id="input" type="file" accept=".jpg, .jpeg, .png, .gif">
             </p>
         </div>
     </div>
     </div>
 
-    
 
 
-    
+
+
 
     <script>
 
@@ -180,7 +180,25 @@
 
         window.onload = function () { viewstart(); }
 
+        var upload = document.getElementById('input');
+        var img;
+       
 
+        upload.onchange = function (e) {
+            e.preventDefault();
+
+            var file = upload.files[0],
+                reader = new FileReader();
+            reader.onload = function (event) {
+                img = new Image();
+                img.src = event.target.result;
+                
+                fileView()
+                
+            };
+            reader.readAsDataURL(file);
+
+        };
 
         function fileView() {
             var li, imgBox, liFile, imgFile, selectedFile, imgFile;
@@ -195,12 +213,13 @@
             liFile = document.getElementById("li_file");
             liFile.innerHTML = '<img src="" alt="" width="40px;" class="poImg" id="img_file">';
             imgFile = document.getElementById("img_file");
-            selectedFile = document.getElementById('input');
+            imgFile.src = img.src;
+            // selectedFile = document.getElementById('input');
             // imgName = selectedFile.files[0].name;
-            imgName = selectedFile.value;
-            imgFile.src =  imgName;
+            // imgName = selectedFile.value;
+            // imgFile.src = imgName;
             if (imgFile.height < 30) { imgFile.classList.add("row") }
-            imgFile.onload = function () { imgeView(); }
+            img.onload = function () { imgeView(); }
         }
 
         function viewstart() {
@@ -348,7 +367,7 @@
 
 
     </script>
-<div class="memoImg">
+    <div class="memoImg">
         <img src="/static/images/memo.png" alt="" width="430px;">
         <img src="/static/images/memo.png" alt="" width="430px;">
         <div class="memoText">
@@ -365,17 +384,18 @@
             <p>파일을 잘 불러왔는데 캔버스 위에서 그려지지 않는 점에서 시간을 많이 소비되었다.</p>
             <p></p>
             <p>이미지를 여러개 불러온 후 클릭하면 캔버스에 들어가게 만들었으나 뷰어를 실행하면서 이전의</p>
-            <p>  이미지로 돌아가는 문제점도 한참을 고민했다.</p>
+            <p> 이미지로 돌아가는 문제점도 한참을 고민했다.</p>
             <br>
 
             <p class="Enter">해결방법:</p>
-            <p>캔버스에 이미지를 로드하기 위해서는  </p>
-            <p>윈도우에 이미지가 완전히 로드 된 후에 할수 </p><p class="Enter">있다는 점을 알게 되었다.</p>
+            <p>캔버스에 이미지를 로드하기 위해서는 </p>
+            <p>윈도우에 이미지가 완전히 로드 된 후에 할수 </p>
+            <p class="Enter">있다는 점을 알게 되었다.</p>
             <p>코드를 분리하여 이미지가 완전히 로드된 후 실행되도록 바꾸거나 함수 내부에서</p>
             <p class="Enter"> onload를 실행하여서 문제를 해결할수 있었다. </p>
-            <p> 두번째 문제는 setInterval 함수로 반복실행되는 부분에서 이미지의 주소가 바뀌지 않고  </p> 
+            <p> 두번째 문제는 setInterval 함수로 반복실행되는 부분에서 이미지의 주소가 바뀌지 않고 </p>
             <p> 처음의 주소로 실행되는 것을 발견하고 클릭이벤트 발생시에 이미지의 사이즈와 주소를 객체 안에 담았고 업데이트 될때 값을 가져와서</p>
-            <p>  쓰는 방식으로 수정하여 문제를 해결하였다.</p>
+            <p> 쓰는 방식으로 수정하여 문제를 해결하였다.</p>
         </div>
 </body>
 
