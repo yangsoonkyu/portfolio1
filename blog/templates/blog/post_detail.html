@@ -1,0 +1,51 @@
+{% extends 'blog/base.html' %} {% block content %}
+<style>
+
+    .top {
+        /* border: 1px solid white; */
+        height:100px;
+
+    }
+
+    .postDetail{
+        width: 700px;
+        height: 500px;
+        /* background-color: white; */
+        margin-left: 100px;
+    }
+
+    .authorLeft{
+        position: absolute;
+        left:   1100px;
+    }
+
+    .title{
+        font-weight: bold;
+        font-size: 1.3em;
+    }
+
+    .top p {
+        color: white;
+        font-weight: bold;
+    }
+
+    
+</style>
+<h1 class="sub_h1">Board</h1>
+<div class="top">
+   <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
+   <p><a href="{% url 'blog:board' %}"> 목록으로 </a> </p>
+</div>
+
+<div class="postDetail">
+       <p> <span class="title">{{post.title}}</span> </p>
+       <hr>
+        {{post.text}}
+        <br><br>
+        <hr>
+        <p class="authorLeft"><span>{{post.author}}</span> <span> {{post.created_date.year}}.{{post.created_date.month}}.{{post.created_date.day}}</span></p>
+
+</div>
+
+
+{% endblock%}

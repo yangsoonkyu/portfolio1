@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %} {% block content %}
+<style>
+    .top {
+        /* border: 1px solid white; */
+        height: 100px;
+
+    }
+
+    .postedit {
+        width: 700px;
+        height: 500px;
+        /* background-color: white; */
+        margin-left: 100px;
+
+
+    }
+
+    .top p {
+        color: white;
+        font-weight: bold;
+    }
+</style>
+<div class="top">
+    <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
+    <!-- <span>
+        <a href="{% url 'blog:post_new' %}"> 글쓰기</a>
+    </span> -->
+    <span>
+        <a href="{% url 'blog:board' %}"> 취소 </a>
+    </span>
+</div>
+<div class="postedit">
+    <form action="" method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">저장</button>
+    </form>
+
+</div>
+{% endblock %}

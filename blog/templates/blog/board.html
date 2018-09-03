@@ -1,0 +1,130 @@
+{% extends 'blog/base.html' %} {% block content %}
+<style>
+    .top {
+        /* border: 1px solid white; */
+        height: 100px;
+
+    }
+
+    .postList {
+        width: 700px;
+        height: 500px;
+        /* background-color: white; */
+        margin-left: 100px;
+
+
+    }
+
+    hr {
+        margin: 3px;
+        color: white;
+    }
+
+    p {
+        margin: 0 0 0 40px;
+    }
+
+    .id {
+        position: relative;
+        top: 9px;
+        left: -20px;
+    }
+
+    .title {
+        position: relative;
+        left: 40px;
+        font-weight: bold;
+    }
+
+    .author {
+        position: relative;
+        left: 40px;
+        font-size: 0.9em;
+    }
+
+    .postComment {
+        position: relative;
+        left: 40px;
+        font-size: 0.8em;
+    }
+
+    .date {
+        position: relative;
+        left: 600px;
+        top: -10px;
+    }
+
+    .top p {
+        color: white;
+        font-weight: bold;
+    }
+
+    .page-links{
+        background-color: rgb(204, 245, 231);
+        position: absolute;
+        top: 650px;
+        width: 700px;
+        display: flex;
+    }
+
+    .next{
+        position: relative;
+        left: 560px;
+    }
+
+    .page-current{
+        position: absolute;
+        left: 280px;
+
+    }
+</style>
+<h1 class="sub_h1"> Board</h1>
+<div class="top">
+    <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
+    <p><a href="{% url 'blog:post_new' %}"> 글쓰기</a></p>
+</div>
+<div class="postList">
+
+    <hr> {% for post in posts %}
+    <p>
+        <span class="id">{{ post.id }} </span>
+        <span class="title">
+            <a href="{{ post.get_absolute_url }}"> {{ post.title }} </a>
+        </span>
+    </p>
+    <p>
+        <!-- <span class="author">{{ post.author}} | </span>
+        <span class="postComment">comment:</span>
+        <span></span> -->
+        <span class="date">{{ post.created_date.year}}. {{ post.created_date.month}}.{{ post.created_date.day}} </span>
+    </p>
+    <hr> {% endfor %}
+
+    <div class="page-links">
+        <p >
+            <span class="previous">
+                {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">이전 페이지</a>
+                {% endif %}</span>
+            <span>
+                <span >
+                    <p class="page-current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+                </span>
+            </span>
+            <span class="next">
+                {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">다음 페이지</a>
+                {% endif %}
+            </span>
+
+
+
+
+        </p>
+
+    </div>
+</div>
+
+
+
+{% endblock%}
