@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 
@@ -53,7 +54,8 @@ def post_new(request):
             form = PostForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
-                post.author = request.user
+                # post.author = request.user
+                post.author = User.objects.get(id=1)
                 post.save()
                 return redirect('blog:post_detail', pk=post.pk)
 
@@ -67,7 +69,8 @@ def post_edit(request, pk):
             form = PostForm(request.POST, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
-                post.author = request.user
+                # post.author = request.user
+                post.author = User.objects.get(id=1)
                 post.save()
                 return redirect('blog:post_detail', pk=post.pk)
         else:
