@@ -77,11 +77,17 @@
         left: 280px;
 
     }
+
+    .postNew{
+        position: absolute;
+        top: 220px;
+        left: 1100px;
+    }
 </style>
 <h1 class="sub_h1"> Board</h1>
 <div class="top">
     <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
-    <p><a href="{% url 'blog:post_new' %}"> 글쓰기</a></p>
+    <p class="postNew"><a href="{% url 'blog:post_new' %}"> 글쓰기</a></p>
 </div>
 <div class="postList">
 
