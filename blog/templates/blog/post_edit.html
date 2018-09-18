@@ -19,21 +19,60 @@
         color: white;
         font-weight: bold;
     }
+
+    #id_title {
+        width: 600px;
+    }
+
+    #id_text {
+        width: 600px;
+        height: 320px;
+    }
+
+    /* #idSubmit{
+        position: relative;
+        left: 550px;
+    } */
+
+    .colorBtn{
+        background-color: #DDF0EC;
+        font-weight: bold;
+    }
+
+    label{
+        display: flex;
+        margin-top: 3px;
+    }
 </style>
 <div class="top">
     <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
     <!-- <span>
         <a href="{% url 'blog:post_new' %}"> 글쓰기</a>
     </span> -->
-    <span>
-        <a href="{% url 'blog:board' %}"> 취소 </a>
-    </span>
 </div>
 <div class="postedit">
-    <form action="" method="POST">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">저장</button>
+    <form action="" method="POST" onkeydown="enterCheck();">{% csrf_token %}
+
+            {{form}}
+       
+        
+        <span id="idSubmit">
+            <input type="button" value ="취소" onclick="moveBoard()" class="colorBtn">
+            <input type="submit" value="저장" class="colorBtn" >
+        </span>
+
+        
     </form>
 
 </div>
+
+<script>
+
+    function moveBoard(){
+        location.href ="{% url 'blog:board' %}";
+
+    }
+
+
+</script>
 {% endblock %}

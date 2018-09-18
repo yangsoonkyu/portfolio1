@@ -29,12 +29,32 @@
         font-weight: bold;
     }
 
+    .colorBtn{
+        position: absolute;
+        top: 220px;
+        left: 1150px;
+        background-color: #DDF0EC;
+        font-weight: bold;
+    }
+
+    .colorBtn2{
+        background-color: #DDF0EC;
+        font-weight: bold;
+    }
+
     
 </style>
+<script>
+function moveBoard(){
+    location.href ="{% url 'blog:board' %}";
+}
+
+
+</script>
 <h1 class="sub_h1">Board</h1>
 <div class="top">
    <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
-   <p><a href="{% url 'blog:board' %}"> 목록으로 </a> </p>
+   <input type="button" value ="목록으로" onclick="moveBoard()" class="colorBtn">
 </div>
 
 <div class="postDetail">
@@ -44,8 +64,13 @@
         <br><br>
         <hr>
         <p class="authorLeft"><span>{{post.author}}</span> <span> {{post.created_date.year}}.{{post.created_date.month}}.{{post.created_date.day}}</span></p>
-
+        <div>
+                <a href="{% url 'blog:post_edit' pk=post.pk %}"> <span><input type="button" value="수정"class="colorBtn2"></span></a>
+                <span><input type="button" value="삭제" onclick="moveremove()" class="colorBtn2"></span>
+            </div>
+            
 </div>
+
 
 
 {% endblock%}
