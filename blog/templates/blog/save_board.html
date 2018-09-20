@@ -83,32 +83,22 @@
     .colorBtn{
         position: absolute;
         top: 220px;
-        left: 1150px;
+        left: 1130px;
         background-color: #DDF0EC;
         font-weight: bold;
-    }
-
-    .saveListBtn{
-        left:1075px ;
     }
 </style>
 
 <script>
     function moveBoard(){
-        location.href ="{% url 'blog:post_new' %}";
-    }
-
-    function moveSaveBoard(){
-        location.href ="{% url 'blog:save_board' %}";
+        location.href ="{% url 'blog:board' %}";
     }
 </script>
 <h1 class="sub_h1"> Board</h1>
 <div class="top">
     <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
-    <!-- <p class="postNew"><a href="{% url 'blog:post_new' %}"> 글쓰기</a></p> -->
     {% if user.is_authenticated %}
-    <input type="button" value ="글쓰기" onclick="moveBoard()" class="colorBtn">
-    <input type="button" value ="저장된글" onclick="moveSaveBoard()" class = "colorBtn saveListBtn" >
+    <input type="button" value ="목록으로" onclick="moveBoard()" class="colorBtn">
     {% endif %}
 </div>
 <div class="postList">

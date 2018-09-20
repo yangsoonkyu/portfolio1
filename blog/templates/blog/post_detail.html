@@ -1,25 +1,24 @@
 {% extends 'blog/base.html' %} {% block content %}
 <style>
-
     .top {
         /* border: 1px solid white; */
-        height:100px;
+        height: 100px;
 
     }
 
-    .postDetail{
+    .postDetail {
         width: 700px;
         height: 500px;
         /* background-color: white; */
         margin-left: 100px;
     }
 
-    .authorLeft{
+    .authorLeft {
         position: absolute;
-        left:   1100px;
+        left: 1100px;
     }
 
-    .title{
+    .title {
         font-weight: bold;
         font-size: 1.3em;
     }
@@ -29,7 +28,7 @@
         font-weight: bold;
     }
 
-    .colorBtn{
+    .colorBtn {
         position: absolute;
         top: 220px;
         left: 1150px;
@@ -37,38 +36,88 @@
         font-weight: bold;
     }
 
-    .colorBtn2{
+    .colorBtn2 {
         background-color: #DDF0EC;
         font-weight: bold;
     }
 
-    
+    .published {
+        position: relative;
+        left: 590px;
+        top: -30px;
+        font-size: 0.8em;
+    }
+
+    .pubBtn2 {
+        background-color: #DDF0EC;
+        font-weight: bold;
+        position: relative;
+        left: 620px;
+        top: -30px;
+
+    }
 </style>
 <script>
-function moveBoard(){
-    location.href ="{% url 'blog:board' %}";
-}
+    function moveBoard() {
+        location.href = "{% url 'blog:board' %}";
+    }
 
+    function movePublish() {
+        location.href = "{% url 'blog:post_publish' pk=post.pk %}";
+    }
+    
+    function moveEdit() {
+        location.href = "{% url 'blog:post_edit' pk=post.pk %}";
+    }
+
+    function moveRemove() {
+        location.href = "{% url 'blog:post_remove' pk=post.pk %}";
+    }
+    
 
 </script>
 <h1 class="sub_h1">Board</h1>
 <div class="top">
-   <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
-   <input type="button" value ="목록으로" onclick="moveBoard()" class="colorBtn">
+    <p>자유 게시판 입니다. 업데이트 진행중입니다.</p>
+    <input type="button" value="목록으로" onclick="moveBoard()" class="colorBtn">
 </div>
 
 <div class="postDetail">
-       <p> <span class="title">{{post.title}}</span> </p>
-       <hr>
-        {{post.text}}
-        <br><br>
-        <hr>
-        <p class="authorLeft"><span>{{post.author}}</span> <span> {{post.created_date.year}}.{{post.created_date.month}}.{{post.created_date.day}}</span></p>
+    <p>
+        <span class="title">{{post.title}}</span>
+    </p>
+    <hr> {{post.text}}
+    <br>
+    <br>
+    <p class="authorLeft">
+        <span>{{post.author}}</span>
+        <span> {{post.created_date.year}}.{{post.created_date.month}}.{{post.created_date.day}}</span>
+    </p>
+    <br>
+    <hr>
+    <div>
+        {% if user.is_authenticated %}
+       
+            <span>
+                <input type="button" value="수정" onclick="moveEdit()" class="colorBtn2">
+            </span>
+        
+        <span>
+            <input type="button" value="삭제" onclick="moveRemove()" class="colorBtn2">
+        </span>
+        {% endif %} {% if post.published_date %}
+        <div class="published">
+            published : {{ post.published_date.year }}.{{ post.published_date.month }}.{{ post.published_date.day }}
+        </div>
+        {% else %}
         <div>
-                <a href="{% url 'blog:post_edit' pk=post.pk %}"> <span><input type="button" value="수정"class="colorBtn2"></span></a>
-                <span><input type="button" value="삭제" onclick="moveremove()" class="colorBtn2"></span>
-            </div>
-            
+            <input class="pubBtn2" type="button" value="Publish" onclick="movePublish()">
+        </div>
+
+        {% endif %}
+    </div>
+
+
 </div>
 
 
