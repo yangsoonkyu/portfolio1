@@ -79,7 +79,16 @@ section {
 
     }
 
+  .login{
+    position:absolute;
+    top: 20px;
+  }
 
+.logout{
+    position:absolute;
+    top: 20px;
+    left: 1250px;
+  }
 
 
 

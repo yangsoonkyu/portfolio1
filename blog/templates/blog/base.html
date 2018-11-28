@@ -34,7 +34,7 @@
                     <li><a href="{% url 'blog:portfolio' %}">Portfolio</a></li>
                     <li><a href="{% url 'blog:contact' %}">Contact</a></li>
                     <li><a href="{% url 'blog:design' %}">Design</a></li>
-                    <li></li>
+                    <li><a href="{% url 'blog:board' %}">Board</a></li>
                 </ul>
             </div>
         </nav>
@@ -57,5 +57,14 @@
                 <div class="col-md-8">
 
                 </div> -->
+ <div>
+
+        {% if user.is_authenticated %}
+        <p class="logout"><span><a href="{% url 'logout' %}">로그아웃</a></span></p>
+{% else%}
+        <span class="login"><span>
+            <a href="{% url 'login' %}">로그인 </a></span> </span>
+    {% endif %}
+        </div>
 </body>
 </html>
